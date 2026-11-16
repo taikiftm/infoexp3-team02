@@ -4,12 +4,63 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>MiniBoard</title>
+    <title>Quiz Board</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <main>
+    <div class="container">
+        <header class="header">
+            <h1>Quiz Board</h1>
+            <nav class="mode-nav">
+                <button type="button" id="btnShowPlay" class="nav-btn active">クイズを遊ぶ</button>
+                <button type="button" id="btnShowAdmin" class="nav-btn">クイズ管理（運営）</button>
+            </nav>
+        </header>
+
+        <main id="play-view" class="view-section">
+            <div class="card">
+                <h2>クイズに挑戦</h2>
+                <p class="muted">※ここは担当Bのプレイ画面エリアです。</p>
+            </div>
+        </main>
+
+        <main id="admin-view" class="view-section hidden">
+      <section class="card">
+        <h2>新しいクイズを投稿</h2>
+        <form id="quizForm">
+          <div class="form-group">
+            <label for="questionInput">問題文</label>
+            <textarea id="questionInput" rows="3" placeholder="例：HTTPでリソースの新規作成成功を表すステータスコードは？" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>選択肢（正解のラジオボタンを選択）</label>
+            <div id="choicesContainer" class="choices-list"></div>
+            <button type="button" id="addChoiceBtn" class="btn btn-secondary">＋ 選択肢を追加</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">クイズを投稿する</button>
+          <p id="adminMessage" class="status-msg"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="list-header">
+          <h2>登録済みクイズ一覧</h2>
+          <span id="quizCount" class="badge">0問</span>
+        </div>
+        <div id="quizList" class="quiz-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/admin.js"></script>
+  <script src="/static/play.js"></script>
+</body>
+</html>
+
+    <!-- <main>
          <h1>Bigboard</h1>
         <p>チーム2の大きなWebアプリ</p>
         <form id="form"><input id="name" maxlength="30" placeholder="Nickname"><textarea id="message"
@@ -25,4 +76,4 @@
     <script src="/static/app.js"></script>
 </body>
 
-</html>
+</html> -->
