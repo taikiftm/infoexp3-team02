@@ -66,14 +66,57 @@
         <form id="form"><input id="name" maxlength="30" placeholder="Nickname"><textarea id="message"
         maxlength="300" placeholder="Message" required></textarea>
 
-        <p id="message-count" class="meta">0 / 300文字</p>
-
-        <button>投稿</button></form>
+        <!-- 既存のMiniBoard -->
+        <form id="form">
+            <input id="name" maxlength="30" placeholder="Nickname">
+            <textarea id="message" maxlength="300"
+                placeholder="Message" required></textarea>
+            <p id="message-count" class="meta">0 / 300文字</p>
+            <button>投稿</button>
+        </form>
 
         <p id="status"></p>
         <section id="messages"></section>
+
+        <hr>
+
+        <h2>Mini Quiz</h2>
+
+        <!-- スタート画面 -->
+        <section id="start-view">
+            <h3>クイズに挑戦！</h3>
+            <p>プレイヤー名を入力して開始してください。</p>
+            <input id="player-name" maxlength="30"
+                placeholder="プレイヤー名">
+            <button id="start-button" type="button">
+                クイズ開始
+            </button>
+        </section>
+
+        <!-- クイズ出題画面 -->
+        <section id="quiz-view" hidden>
+            <p id="question-number">問題 1 / 5</p>
+            <h3 id="question-text">ここに問題文を表示</h3>
+            <div id="choices">
+                <!-- 選択肢をJavaScriptで追加 -->
+            </div>
+            <p id="answer-feedback"></p>
+        </section>
+
+        <!-- 結果・ランキング画面 -->
+        <section id="result-view" hidden>
+            <h3>クイズ結果</h3>
+            <p id="final-score">あなたの得点：0 / 5点</p>
+            <p id="average-score">全体平均：- 点</p>
+            <h4>ランキング</h4>
+            <div id="ranking">
+                <!-- ランキングをJavaScriptで追加 -->
+            </div>
+        </section>
     </main>
+
     <script src="/static/app.js"></script>
+    <script src="/static/play.js"></script>
 </body>
 
-</html> -->
+</html>

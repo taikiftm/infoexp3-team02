@@ -42,8 +42,21 @@ def index():
 
 @app.get("/api/quizzes")
 def get_quizzes():
+    is_random = request.args.get("random", "").lower() in ("1", "true")
+    limit_raw = request.args.get("limit", "")
+
+    order_clause = "ORDER BY RANDOM()" if is_random else "ORDER BY id ASC"
+    query = f"SELECT * FROM quizzes {order_clause}"
+    params = []
+
+    # 正の整数が指定された場合のみ LIMIT を適用
+    if limit_raw.isdigit() and int(limit_raw) > 0:
+        query += " LIMIT ?"
+        params.append(int(limit_raw))
+
     with connect() as con:
-        rows = con.execute("SELECT * FROM quizzes ORDER BY id ASC").fetchall()
+        rows = con.execute(query, params).fetchall()
+
     result = []
     for r in rows:
         item = dict(r)
