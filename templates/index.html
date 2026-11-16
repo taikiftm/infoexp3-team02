@@ -2,30 +2,61 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quiz Board</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quiz Board</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Quiz Board</h1>
-            <nav class="mode-nav">
-                <button type="button" id="btnShowPlay" class="nav-btn active">クイズを遊ぶ</button>
-                <button type="button" id="btnShowAdmin" class="nav-btn">クイズ管理（運営）</button>
-            </nav>
-        </header>
+  <div class="container">
+    <header class="header">
+      <h1>Quiz Board</h1>
+      <nav class="mode-nav">
+        <button type="button" id="btnShowPlay" class="nav-btn active">クイズを遊ぶ</button>
+        <button type="button" id="btnShowAdmin" class="nav-btn">クイズ管理（運営）</button>
+      </nav>
+    </header>
 
-        <main id="play-view" class="view-section">
-            <div class="card">
-                <h2>クイズに挑戦</h2>
-                <p class="muted">※ここは担当Bのプレイ画面エリアです。</p>
-            </div>
-        </main>
+    <!-- 訪問者プレイ画面（担当B） -->
+    <main id="play-view" class="view-section">
+      <!-- スタート画面 -->
+      <section id="start-view" class="card">
+        <h2>クイズに挑戦！</h2>
+        <p class="muted">プレイヤー名を入力して開始してください。</p>
+        <div class="form-group">
+          <input id="player-name" type="text" maxlength="30" placeholder="プレイヤー名">
+        </div>
+        <button id="start-button" type="button" class="btn btn-primary btn-block">
+          クイズ開始
+        </button>
+      </section>
 
-        <main id="admin-view" class="view-section hidden">
+      <!-- クイズ出題画面 -->
+      <section id="quiz-view" class="card" hidden>
+        <p id="question-number" class="badge">問題 1 / 5</p>
+        <h2 id="question-text">ここに問題文を表示</h2>
+        <div id="choices" class="choices-list">
+          <!-- 選択肢をJavaScriptで追加 -->
+        </div>
+        <p id="answer-feedback" class="status-msg"></p>
+      </section>
+
+      <!-- 結果・ランキング画面 -->
+      <section id="result-view" class="card" hidden>
+        <h2>クイズ結果</h2>
+        <p id="final-score">あなたの得点：0 / 5点</p>
+        <p id="average-score" class="muted">全体平均：- 点</p>
+        <hr>
+        <h3>ランキング</h3>
+        <div id="ranking">
+          <!-- ランキングをJavaScriptで追加 -->
+        </div>
+      </section>
+    </main>
+
+    <!-- 運営者管理画面（担当C） -->
+    <main id="admin-view" class="view-section hidden">
       <section class="card">
         <h2>新しいクイズを投稿</h2>
         <form id="quizForm">
@@ -57,66 +88,6 @@
 
   <script src="/static/admin.js"></script>
   <script src="/static/play.js"></script>
-</body>
-</html>
-
-    <!-- <main>
-         <h1>Bigboard</h1>
-        <p>チーム2の大きなWebアプリ</p>
-        <form id="form"><input id="name" maxlength="30" placeholder="Nickname"><textarea id="message"
-        maxlength="300" placeholder="Message" required></textarea>
-
-        <!-- 既存のMiniBoard -->
-        <form id="form">
-            <input id="name" maxlength="30" placeholder="Nickname">
-            <textarea id="message" maxlength="300"
-                placeholder="Message" required></textarea>
-            <p id="message-count" class="meta">0 / 300文字</p>
-            <button>投稿</button>
-        </form>
-
-        <p id="status"></p>
-        <section id="messages"></section>
-
-        <hr>
-
-        <h2>Mini Quiz</h2>
-
-        <!-- スタート画面 -->
-        <section id="start-view">
-            <h3>クイズに挑戦！</h3>
-            <p>プレイヤー名を入力して開始してください。</p>
-            <input id="player-name" maxlength="30"
-                placeholder="プレイヤー名">
-            <button id="start-button" type="button">
-                クイズ開始
-            </button>
-        </section>
-
-        <!-- クイズ出題画面 -->
-        <section id="quiz-view" hidden>
-            <p id="question-number">問題 1 / 5</p>
-            <h3 id="question-text">ここに問題文を表示</h3>
-            <div id="choices">
-                <!-- 選択肢をJavaScriptで追加 -->
-            </div>
-            <p id="answer-feedback"></p>
-        </section>
-
-        <!-- 結果・ランキング画面 -->
-        <section id="result-view" hidden>
-            <h3>クイズ結果</h3>
-            <p id="final-score">あなたの得点：0 / 5点</p>
-            <p id="average-score">全体平均：- 点</p>
-            <h4>ランキング</h4>
-            <div id="ranking">
-                <!-- ランキングをJavaScriptで追加 -->
-            </div>
-        </section>
-    </main>
-
-    <script src="/static/app.js"></script>
-    <script src="/static/play.js"></script>
 </body>
 
 </html>
