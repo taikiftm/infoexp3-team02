@@ -31,17 +31,24 @@ def get_messages():
         rows = con.execute("SELECT * FROM messages ORDER BY id DESC").fetchall()
     return jsonify([dict(r) for r in rows])
 
+    
 @app.post("/api/messages")
 def create_message():
     data = request.get_json(silent=True) or {}
     name = str(data.get("name", "")).strip()[:30]
     message = str(data.get("message", "")).strip()[:300]
-    if not name or not message:
-        return jsonify({"error": "name and message are required"}), 400
+    if not message:
+        return jsonify({"error": "message are required"}), 400
     created_at = datetime.now(timezone.utc).isoformat()
     with connect() as con:
-        cur = con.execute("INSERT INTO messages(name,message,created_at) VALUES(?,?,?)", (name,message,created_at))
-        row = con.execute("SELECT * FROM messages WHERE id=?", (cur.lastrowid,)).fetchone()
+        if not name:
+            cur = con.execute("INSERT INTO messages(name, message, created_at) VALUES(?, ?, ?)", ("名無し", message, created_at))
+            msg_id = cur.lastrowid
+        else:
+            cur = con.execute("INSERT INTO messages(name, message, created_at) VALUES(?, ?, ?)", (name, message, created_at))
+            msg_id = cur.lastrowid
+        
+        row = con.execute("SELECT * FROM messages WHERE id=?", (msg_id,)).fetchone()
     return jsonify(dict(row)), 201
 
 @app.put("/api/messages/<int:message_id>")
